@@ -50,7 +50,7 @@ function CoursePage() {
           </div>
 
           <ul className="mt-8 grid sm:grid-cols-2 gap-3">
-            {course.highlights.map((h) => (
+            {course.highlights.map((h: string) => (
               <li key={h} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40 border border-border">
                 <Check className="text-primary mt-0.5 shrink-0" size={18} />
                 <span className="text-sm">{h}</span>
