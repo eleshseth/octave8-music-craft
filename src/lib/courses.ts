@@ -1,0 +1,53 @@
+export type Course = {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  highlights: string[];
+  emoji: string;
+};
+
+export const COURSES: Course[] = [
+  { slug: "guitar", name: "Guitar", emoji: "🎸",
+    tagline: "Acoustic • Electric • Bass",
+    description: "From your first chord to soaring solos — master rhythm, lead and fingerstyle guitar with structured lessons and live jam sessions.",
+    highlights: ["Beginner to advanced tracks", "Acoustic & electric", "Music theory + ear training", "Live recital every term"] },
+  { slug: "drums", name: "Drums", emoji: "🥁",
+    tagline: "Groove • Rudiments • Performance",
+    description: "Build rock-solid timing and explosive grooves. Learn rock, jazz, funk and Bollywood styles on a full acoustic & electronic kit.",
+    highlights: ["Rudiments & coordination", "Genre-based grooves", "Live drumming sessions", "Performance training"] },
+  { slug: "keyboard", name: "Keyboard / Piano", emoji: "🎹",
+    tagline: "Classical • Bollywood • Western",
+    description: "Develop two-hand independence, chord voicings and improvisation across classical, film and contemporary styles.",
+    highlights: ["Sight reading", "Chord theory & scales", "Film & devotional repertoire", "Trinity / ABRSM prep"] },
+  { slug: "violin", name: "Violin", emoji: "🎻",
+    tagline: "Indian Classical • Western",
+    description: "Refine bowing, intonation and expressive playing in Carnatic, Hindustani and Western traditions.",
+    highlights: ["Posture & bow control", "Raga & scale work", "Solo & ensemble", "Exam preparation"] },
+  { slug: "flute", name: "Flute", emoji: "🪈",
+    tagline: "Bansuri • Western Flute",
+    description: "Discover breath control, tone and melody on the Indian Bansuri or Western concert flute.",
+    highlights: ["Breath techniques", "Raga improvisation", "Notation reading", "Stage performance"] },
+  { slug: "ukulele", name: "Ukulele", emoji: "🎶",
+    tagline: "Fun • Fast • Portable",
+    description: "Start strumming and singing along in your very first class. Perfect for kids, beginners and quick learners.",
+    highlights: ["Easy chord shapes", "Strumming patterns", "Sing & play", "Beginner friendly"] },
+  { slug: "singing-indian", name: "Indian Singing", emoji: "🎤",
+    tagline: "Hindustani • Bollywood • Devotional",
+    description: "Voice culture, sargam, raga gayan and Bollywood/devotional repertoire under classically trained mentors.",
+    highlights: ["Voice modulation", "Raga & taal", "Playback singing", "Stage confidence"] },
+  { slug: "singing-western", name: "Western Singing", emoji: "🎙️",
+    tagline: "Pop • Rock • Musical Theatre",
+    description: "Develop range, pitch, harmony and microphone technique for pop, rock, R&B and musical theatre.",
+    highlights: ["Vocal warm-ups", "Harmony & pitch", "Mic technique", "Genre repertoire"] },
+  { slug: "dholak", name: "Dholak", emoji: "🪘",
+    tagline: "Folk • Devotional • Bollywood",
+    description: "Master classic dholak strokes, theka and folk patterns used in weddings, kirtans and Bollywood numbers.",
+    highlights: ["Hand strokes & theka", "Folk & bhajan rhythms", "Accompaniment skills", "Live performance"] },
+  { slug: "tabla", name: "Tabla", emoji: "🥁",
+    tagline: "Hindustani Classical Percussion",
+    description: "Authentic tabla training in bols, taals and improvisation rooted in Hindustani classical tradition.",
+    highlights: ["Bol & taal vocabulary", "Solo & accompaniment", "Theory & notation", "Performance grading"] },
+];
+
+export const FEE = 1500;
