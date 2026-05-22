@@ -19,7 +19,7 @@ export const Route = createFileRoute("/contact")({
 // 2. Add an email service, then a template that uses {{from_name}}, {{from_email}},
 //    {{phone}}, {{course}}, {{message}} variables and sends to octave8musicacademy1@gmail.com
 // 3. Paste your Service ID, Template ID and Public Key below.
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_SERVICE_ID = "service_ukhekhl";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 // ─────────────────────────────────────────────────────────────────────────────
