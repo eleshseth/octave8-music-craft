@@ -9,7 +9,7 @@ export const Route = createFileRoute("/courses")({
   head: () => ({
     meta: [
       { title: "Courses — Octave 8 Music Academy" },
-      { name: "description", content: "Explore guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla courses at ₹1500/month." },
+      { name: "description", content: "Explore guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla courses with monthly fees from ₹200 to ₹3500." },
     ],
   }),
   component: CoursesLayout,
@@ -22,7 +22,7 @@ function CoursesLayout() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <SectionHeading eyebrow="Our Courses" title="Choose your instrument" subtitle={`Each course runs at ₹${FEE} per month. Beginner-friendly, performance-focused.`} center />
+      <SectionHeading eyebrow="Our Courses" title="Choose your instrument" subtitle="Flexible monthly fees for every skill level, from beginner-friendly options to advanced performance training." center />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
         {COURSES.map((c, k) => (
           <motion.div key={c.slug}
@@ -30,13 +30,19 @@ function CoursesLayout() {
             transition={{ delay: k * 0.05 }}>
             <Link to="/courses/$slug" params={{ slug: c.slug }}
               className="block group rounded-2xl bg-card border border-border hover:border-primary transition-all overflow-hidden h-full">
-              <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-card flex items-center justify-center text-7xl group-hover:scale-110 transition-transform duration-500">
-                {c.emoji}
+              <div className="aspect-[4/3] overflow-hidden bg-gradient-to-br from-primary/20 to-card group-hover:scale-110 transition-transform duration-500">
+                {c.image ? (
+                  <img src={c.image} alt={c.name} className={`h-full w-full object-cover ${c.slug === "drums" ? "object-bottom" : ""}`} />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-7xl">
+                    {c.emoji}
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <div className="flex items-baseline justify-between">
                   <h3 className="font-display text-2xl">{c.name}</h3>
-                  <span className="text-primary font-semibold">₹{FEE}/mo</span>
+                  <span className="text-primary font-semibold">₹{c.fee ?? FEE}/mo</span>
                 </div>
                 <p className="text-xs text-primary uppercase tracking-widest mt-1">{c.tagline}</p>
                 <p className="mt-3 text-sm text-muted-foreground line-clamp-2">{c.description}</p>

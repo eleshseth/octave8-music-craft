@@ -10,17 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as NotationsRouteImport } from './routes/notations'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CombosRouteImport } from './routes/combos'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotationsRoute = NotationsRouteImport.update({
+  id: '/notations',
+  path: '/notations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -48,6 +56,11 @@ const CombosRoute = CombosRouteImport.update({
   path: '/combos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -58,78 +71,103 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => CoursesRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/notations': typeof NotationsRoute
   '/shop': typeof ShopRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/notations': typeof NotationsRoute
   '/shop': typeof ShopRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/notations': typeof NotationsRoute
   '/shop': typeof ShopRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/combos'
     | '/contact'
     | '/courses'
     | '/faculty'
     | '/gallery'
+    | '/notations'
     | '/shop'
+    | '/blog/$slug'
     | '/courses/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blog'
     | '/combos'
     | '/contact'
     | '/courses'
     | '/faculty'
     | '/gallery'
+    | '/notations'
     | '/shop'
+    | '/blog/$slug'
     | '/courses/$slug'
   id:
     | '__root__'
     | '/'
+    | '/blog'
     | '/combos'
     | '/contact'
     | '/courses'
     | '/faculty'
     | '/gallery'
+    | '/notations'
     | '/shop'
+    | '/blog/$slug'
     | '/courses/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CombosRoute: typeof CombosRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRouteWithChildren
   FacultyRoute: typeof FacultyRoute
   GalleryRoute: typeof GalleryRoute
+  NotationsRoute: typeof NotationsRoute
   ShopRoute: typeof ShopRoute
 }
 
@@ -140,6 +178,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notations': {
+      id: '/notations'
+      path: '/notations'
+      fullPath: '/notations'
+      preLoaderRoute: typeof NotationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -177,6 +222,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CombosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -191,8 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesSlugRouteImport
       parentRoute: typeof CoursesRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface CoursesRouteChildren {
   CoursesSlugRoute: typeof CoursesSlugRoute
@@ -207,11 +276,13 @@ const CoursesRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRouteWithChildren,
   CombosRoute: CombosRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRouteWithChildren,
   FacultyRoute: FacultyRoute,
   GalleryRoute: GalleryRoute,
+  NotationsRoute: NotationsRoute,
   ShopRoute: ShopRoute,
 }
 export const routeTree = rootRouteImport

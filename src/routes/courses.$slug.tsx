@@ -13,7 +13,7 @@ export const Route = createFileRoute("/courses/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData ? [
       { title: `${loaderData.course.name} Classes — Octave 8 Music Academy` },
-      { name: "description", content: `${loaderData.course.name} classes at Octave 8 — ${loaderData.course.tagline}. ₹${FEE}/month.` },
+      { name: "description", content: `${loaderData.course.name} classes at Octave 8 — ${loaderData.course.tagline}. ₹${loaderData.course.fee ?? FEE}/month.` },
     ] : [],
   }),
   notFoundComponent: () => (
@@ -28,6 +28,8 @@ export const Route = createFileRoute("/courses/$slug")({
 
 function CoursePage() {
   const { course } = Route.useLoaderData();
+  const courseFee = course.fee ?? FEE;
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       <Link to="/courses" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
@@ -35,8 +37,14 @@ function CoursePage() {
       </Link>
       <div className="grid lg:grid-cols-5 gap-10 items-start">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}
-          className="lg:col-span-2 aspect-square rounded-3xl bg-gradient-to-br from-primary/30 via-card to-background border border-border flex items-center justify-center text-[16rem] leading-none ring-glow">
-          {course.emoji}
+          className="lg:col-span-2 aspect-square overflow-hidden rounded-3xl bg-gradient-to-br from-primary/30 via-card to-background border border-border ring-glow">
+          {course.image ? (
+            <img src={course.image} alt={course.name} className={`h-full w-full object-cover ${course.slug === "drums" ? "object-bottom" : ""}`} />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-[16rem] leading-none">
+              {course.emoji}
+            </div>
+          )}
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
           className="lg:col-span-3">
@@ -45,7 +53,7 @@ function CoursePage() {
           <p className="mt-5 text-lg text-muted-foreground">{course.description}</p>
 
           <div className="mt-8 inline-flex items-baseline gap-3 px-6 py-4 rounded-2xl bg-card border border-primary/40">
-            <span className="font-display text-4xl text-primary">₹{FEE}</span>
+            <span className="font-display text-4xl text-primary">₹{courseFee}</span>
             <span className="text-muted-foreground">/ month</span>
           </div>
 

@@ -5,23 +5,27 @@ import { ArrowRight, Music, Sparkles, Award, Users } from "lucide-react";
 import { COURSES, FEE } from "@/lib/courses";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EnquireButton } from "@/components/EnquireButton";
-import hero1 from "@/assets/hero-guitar.jpg";
-import hero2 from "@/assets/hero-drums.jpg";
-import hero3 from "@/assets/hero-keys.jpg";
 import hero4 from "@/assets/hero-vocal.jpg";
+import achievementImage from "@/assets/acheivements.png";
+import kidsImage from "@/assets/kids.JPG";
+import kriyanshImage from "@/assets/kriyansh.webp";
+import violinGirlImage from "@/assets/viogirl.webp";
+import danceImage from "@/assets/dance.png";
 
 const SLIDES = [
-  { img: hero1, kicker: "Strings that speak", title: "Find your sound", sub: "Guitar, ukulele & violin for every level" },
-  { img: hero2, kicker: "Rhythm in your veins", title: "Hit harder. Play tighter.", sub: "Drums, tabla & dholak with industry pros" },
-  { img: hero3, kicker: "Keys to mastery", title: "Compose your future", sub: "Piano & keyboard across classical and pop" },
+  { img: achievementImage, kicker: "Strings that speak", title: "Find your sound", sub: "Guitar, ukulele & violin for every level" },
+  { img: kidsImage, kicker: "Rhythm in your veins", title: "Hit harder. Play tighter.", sub: "Drums, tabla & dholak with industry pros" },
+  { img: kriyanshImage, kicker: "Keys to mastery", title: "Compose your future", sub: "Piano & keyboard across classical and pop" },
   { img: hero4, kicker: "Find your voice", title: "Sing like nobody's listening", sub: "Indian & Western vocal training" },
+  { img: violinGirlImage, kicker: "Dance in motion", title: "Move with the music", sub: "Performance, rhythm and expression in every class" },
+  { img: danceImage, kicker: "Rhythm & movement", title: "Let the beat lead", sub: "Dance, expression and musical energy in every session" },
 ];
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Octave 8 Music Academy — Crafting Musicians" },
-      { name: "description", content: "Premier music academy offering guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla classes at ₹1500/month." },
+      { name: "description", content: "Premier music academy offering guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla classes with monthly fees from ₹200 to ₹3500." },
     ],
   }),
   component: Home,
@@ -75,6 +79,9 @@ function Home() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <EnquireButton />
+            <Link to="/contact" search={{ mode: "registration" }} className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all">
+              Registration <ArrowRight size={18} />
+            </Link>
             <Link to="/courses" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-primary text-foreground">
               Explore Courses <ArrowRight size={18} />
             </Link>
@@ -95,7 +102,7 @@ function Home() {
           {[
             { n: "10+", l: "Instruments", icon: Music },
             { n: "500+", l: "Students Trained", icon: Users },
-            { n: "₹1500", l: "Monthly Fee", icon: Sparkles },
+            { n: "₹200–₹3500", l: "Monthly Fee", icon: Sparkles },
             { n: "Pro", l: "Faculty Team", icon: Award },
           ].map((s, k) => (
             <motion.div key={k} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: k * 0.1 }}
@@ -110,7 +117,7 @@ function Home() {
 
       {/* COURSES PREVIEW */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
-        <SectionHeading eyebrow="What we teach" title="Pick your instrument" subtitle={`Ten disciplines, one passion. Every course at just ₹${FEE}/month.`} />
+        <SectionHeading eyebrow="What we teach" title="Pick your instrument" subtitle="Ten disciplines, one passion. Flexible monthly fees for every instrument and learning level." />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-12">
           {COURSES.map((c, k) => (
             <motion.div key={c.slug}
@@ -126,6 +133,29 @@ function Home() {
               </Link>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ACHIEVEMENTS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+        <div className="overflow-hidden rounded-3xl border border-border bg-card/80">
+          <div className="p-6 sm:p-8 lg:p-10">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Achievement</p>
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl">A place where dedication turns into real milestones</h2>
+              <p className="mt-4 text-base text-muted-foreground max-w-2xl">
+                From first lessons to stage-ready performances, our students keep growing through consistent guidance, community, and opportunities to shine.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm text-primary">500+ students trained</span>
+                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm text-primary">Award-winning faculty</span>
+                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm text-primary">Regular stage performances</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-2 overflow-hidden rounded-b-[1.5rem] border-t border-border bg-background">
+            <img src={achievementImage} alt="Octave 8 achievements" className="h-[380px] w-full object-cover object-center sm:h-[500px] lg:h-[620px]" />
+          </div>
         </div>
       </section>
 

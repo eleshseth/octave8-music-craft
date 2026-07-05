@@ -18,6 +18,8 @@ const NAV = [
   { to: "/combos", label: "Combo Packages" },
   { to: "/faculty", label: "Faculty" },
   { to: "/gallery", label: "Gallery" },
+  { to: "/notations", label: "Notations" },
+  { to: "/blog", label: "Blog" },
   { to: "/shop", label: "Shop" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -48,7 +50,14 @@ function Header() {
           ))}
           <Link
             to="/contact"
-            className="ml-3 px-5 py-2.5 rounded-full gradient-primary text-primary-foreground font-semibold text-sm hover:ring-glow transition-all"
+            search={{ mode: "registration" }}
+            className="ml-3 px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-sm transition-all"
+          >
+            Registration
+          </Link>
+          <Link
+            to="/contact"
+            className="ml-2 px-5 py-2.5 rounded-full gradient-primary text-primary-foreground font-semibold text-sm hover:ring-glow transition-all"
           >
             Enquire Now
           </Link>
@@ -65,6 +74,9 @@ function Header() {
                 {n.label}
               </Link>
             ))}
+            <Link to="/contact" search={{ mode: "registration" }} onClick={() => setOpen(false)} className="px-3 py-3 rounded-md hover:bg-secondary text-primary font-semibold">
+              Registration
+            </Link>
           </div>
         </div>
       )}
@@ -98,7 +110,7 @@ function Footer() {
           <h4 className="font-display text-lg mb-3 text-primary">Get in Touch</h4>
           <a href="tel:7838825103" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-2"><Phone size={16}/> +91 78388 25103</a>
           <a href="mailto:octave8musicacademy1@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-2"><Mail size={16}/> octave8musicacademy1@gmail.com</a>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3"><Music2 size={16} className="text-primary"/> Monthly fee ₹1500 per course</div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-3"><Music2 size={16} className="text-primary"/> Monthly fees from ₹200 to ₹3500</div>
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
@@ -140,11 +152,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Octave 8 Music Academy — Crafting Musicians" },
-      { name: "description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. ₹1500/month per course." },
+      { name: "description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. Monthly fees from ₹200 to ₹3500." },
       { property: "og:title", content: "Octave 8 Music Academy — Crafting Musicians" },
       { name: "twitter:title", content: "Octave 8 Music Academy — Crafting Musicians" },
-      { property: "og:description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. ₹1500/month per course." },
-      { name: "twitter:description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. ₹1500/month per course." },
+      { property: "og:description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. Monthly fees from ₹200 to ₹3500." },
+      { name: "twitter:description", content: "Learn guitar, drums, keyboard, violin, flute, ukulele, singing, dholak and tabla at Octave 8 Music Academy. Monthly fees from ₹200 to ₹3500." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d84f7f68-f78e-41b0-891e-d8bba721f4d4/id-preview-fdb56d3f--1d778e9e-efe4-4fe5-a443-e67d25e58b6f.lovable.app-1779353289408.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d84f7f68-f78e-41b0-891e-d8bba721f4d4/id-preview-fdb56d3f--1d778e9e-efe4-4fe5-a443-e67d25e58b6f.lovable.app-1779353289408.png" },
       { name: "twitter:card", content: "summary_large_image" },
