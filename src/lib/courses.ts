@@ -31,7 +31,7 @@ export const COURSES: Course[] = [
     tagline: "Technique • Repertoire • Expression",
     description: "Build strong foundations in fingerstyle technique, classical repertoire and expressive playing with guided practice and performance coaching.",
     highlights: ["Classical technique", "Fingerstyle foundations", "Repertoire study", "Performance readiness"],
-    fee: 200 },
+    fee: 2000 },
   { slug: "drums", name: "Drums", emoji: "🥁", image: drumImage,
     tagline: "Groove • Rudiments • Performance",
     description: "Build rock-solid timing and explosive grooves. Learn rock, jazz, funk and Bollywood styles on a full acoustic & electronic kit.",
