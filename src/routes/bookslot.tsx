@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { AlertCircle, CalendarDays, CheckCircle2, MapPin, Send, Clock3 } from "lucide-react";
+import { AlertCircle, CalendarDays, CheckCircle2, Mail, MapPin, Send, Clock3 } from "lucide-react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/bookslot")({
 
 const EMAILJS_SERVICE_ID = "service_ukhekhl";
 const EMAILJS_TEMPLATE_ID = "template_h4tlurr";
+const EMAILJS_CONFIRMATION_TEMPLATE_ID = "template_29mh0id";
 const EMAILJS_PUBLIC_KEY = "fGvdxCECkPpJphBgA";
 
 function BookSlotPage() {
@@ -36,12 +37,14 @@ function BookSlotPage() {
 
     const form = formRef.current;
     const name = (form.elements.namedItem("from_name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("from_email") as HTMLInputElement).value;
     const slot = (form.elements.namedItem("slot") as HTMLSelectElement).value;
     const date = (form.elements.namedItem("date") as HTMLInputElement).value;
     const address = (form.elements.namedItem("address") as HTMLTextAreaElement).value;
     const message = [
       "Book a Slot Request",
       `Name: ${name}`,
+      `Email: ${email}`,
       `Time Slot: ${slot}`,
       `Date: ${date}`,
       `Address: ${address}`,
@@ -54,6 +57,18 @@ function BookSlotPage() {
       await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form, {
         publicKey: EMAILJS_PUBLIC_KEY,
       });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CONFIRMATION_TEMPLATE_ID,
+        {
+          to_email: email,
+          customer_name: name,
+          address,
+          booking_date: date,
+          booking_time: slot,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
       setStatus("success");
       form.reset();
     } catch (error: unknown) {
@@ -84,13 +99,23 @@ function BookSlotPage() {
           <input required name="from_name" placeholder="Full name" className="input" />
         </Field>
 
+        <Field label="Email ID" icon={<Mail size={17} />}>
+          <input required name="from_email" type="email" placeholder="you@example.com" className="input" />
+        </Field>
+
         <div className="grid sm:grid-cols-2 gap-5">
           <Field label="Time Slot" icon={<Clock3 size={17} />}>
             <select required name="slot" className="input">
-              <option value="">Select a time slot</option>
-              <option value="Morning: 9:00 AM - 12:00 PM">Morning: 9:00 AM - 12:00 PM</option>
-              <option value="Afternoon: 12:00 PM - 4:00 PM">Afternoon: 12:00 PM - 4:00 PM</option>
-              <option value="Evening: 4:00 PM - 8:00 PM">Evening: 4:00 PM - 8:00 PM</option>
+              <option value="">Available time slot</option>
+              <option value="9:00 AM - 10:00 AM" disabled>9:00 AM - 10:00 AM (Booked)</option>
+              <option value="10:00 AM - 12:30 PM" disabled>10:00 AM - 12:30 PM (Booked)</option>
+              <option value="12:30 PM - 1:30 PM" disabled>12:30 PM - 1:30 PM (Booked)</option>
+              <option value="1:30 PM - 2:30 PM" disabled>1:30 PM - 2:30 PM (Booked)</option>
+              <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+              <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+              <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+              <option value="7:45 PM - 8:45 PM">7:45 PM - 8:45 PM</option>
+              <option value="8:45 PM - 9:45 PM">8:45 PM - 9:45 PM</option>
             </select>
           </Field>
           <Field label="Date" icon={<CalendarDays size={17} />}>
