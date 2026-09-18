@@ -16,6 +16,7 @@ import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CombosRouteImport } from './routes/combos'
+import { Route as BookslotRouteImport } from './routes/bookslot'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
@@ -56,6 +57,11 @@ const CombosRoute = CombosRouteImport.update({
   path: '/combos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookslotRoute = BookslotRouteImport.update({
+  id: '/bookslot',
+  path: '/bookslot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -80,6 +86,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bookslot': typeof BookslotRoute
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bookslot': typeof BookslotRoute
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bookslot': typeof BookslotRoute
   '/combos': typeof CombosRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
+    | '/bookslot'
     | '/combos'
     | '/contact'
     | '/courses'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
+    | '/bookslot'
     | '/combos'
     | '/contact'
     | '/courses'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/blog'
+    | '/bookslot'
     | '/combos'
     | '/contact'
     | '/courses'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  BookslotRoute: typeof BookslotRoute
   CombosRoute: typeof CombosRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRouteWithChildren
@@ -222,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CombosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookslot': {
+      id: '/bookslot'
+      path: '/bookslot'
+      fullPath: '/bookslot'
+      preLoaderRoute: typeof BookslotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -277,6 +297,7 @@ const CoursesRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  BookslotRoute: BookslotRoute,
   CombosRoute: CombosRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRouteWithChildren,
